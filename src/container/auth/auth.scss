@@ -1,0 +1,15 @@
+.auth {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-auth {
+    @extend .auth;
+    .ant-form-item-control-input-content {
+        .ant-btn.ant-btn-primary {
+            width: 100%;
+        }
+    }
+}

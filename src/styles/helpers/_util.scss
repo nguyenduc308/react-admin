@@ -1,0 +1,14 @@
+.text-center {
+    text-align: center;
+}
+.list-table {
+    width: 100%;
+    thead {
+        background-color: #000;
+        color: #fff;
+    }
+    td,
+    th {
+        padding: 4px 8px;
+    }
+}
