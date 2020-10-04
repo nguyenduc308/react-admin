@@ -4,16 +4,17 @@ import Sidebar from './sidebar/Sidebar';
 
 const LayoutWithSidebar = ({ children }) => {
     return (
-        <div className="grid wide">
+        <React.Fragment>
             <Header />
-            <hr />
-            <div className="row">
-                <div className="col col-3">
-                    <Sidebar />
+            <div className="grid wide">
+                <div className="row">
+                    <div className="col col-3">
+                        <Sidebar />
+                    </div>
+                    <div className="col col-9">{children}</div>
                 </div>
-                <div className="col col-9">{children}</div>
             </div>
-        </div>
+        </React.Fragment>
     );
 };
 

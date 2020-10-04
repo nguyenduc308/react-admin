@@ -1,6 +1,7 @@
 import {
-    CREATE_CATEGORY_SUCCESS,
+    // CREATE_CATEGORY_SUCCESS,
     GET_CATEGORIES_SUCCESS,
+    DELETE_ITEM,
 } from '../constants/categories';
 
 const initialState = {
@@ -13,12 +14,22 @@ export default (state = initialState, action) => {
                 ...state,
                 list: action.payload,
             };
-        case CREATE_CATEGORY_SUCCESS:
+        // case CREATE_CATEGORY_SUCCESS:
+        //     return {
+        //         ...state,
+        //         list: {
+        //             ...state.list,
+        //             data: [...state.list.data, action.payload],
+        //         },
+        //     };
+        case DELETE_ITEM:
             return {
                 ...state,
                 list: {
                     ...state.list,
-                    data: [...state.list.data, action.payload],
+                    data: state.list.data.filter(
+                        (item) => item._id !== action.payload,
+                    ),
                 },
             };
         default:

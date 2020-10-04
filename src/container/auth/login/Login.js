@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
@@ -23,7 +23,7 @@ const Login = () => {
     return (
         <div className="form-auth">
             <Form form={form} name="horizontal_login" onFinish={onFinish}>
-                <h3 className="text-center">Đăng nhập</h3>
+                <h3 className="text-center">Đăng nhập vào Dashboard</h3>
                 <Form.Item
                     name="email"
                     rules={[
@@ -68,7 +68,7 @@ const Login = () => {
                                 // form.getFieldsError().filter(({ errors }) => errors.length).length
                             }
                         >
-                            Log in
+                            Đăng nhập
                         </Button>
                     )}
                 </Form.Item>

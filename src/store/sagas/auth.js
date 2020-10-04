@@ -1,4 +1,4 @@
-import { call, put, cancel, take, fork } from 'redux-saga/effects';
+import { call, put, cancel, take, fork, delay } from 'redux-saga/effects';
 import {
     LOGIN_FAILED,
     LOGIN_SUCCESS,
@@ -9,8 +9,9 @@ import {
 import jwt_decode from 'jwt-decode';
 import { loginApi } from '../../apis/auth';
 import { LOCAL_TOKEN } from '../../const/keys';
+let timerId;
 
-export function* fetchLogin(credentials) {
+function* fetchLogin(credentials) {
     try {
         const { data } = yield call(loginApi, credentials);
         const decoded = jwt_decode(data.jwt);
@@ -30,17 +31,31 @@ export function* fetchLogin(credentials) {
         }
     }
 }
+function setupSectionLogin(exp) {
+    if (timerId) {
+        clearTimeout(timerId);
+    }
+    timerId = setTimeout(function* () {
+        yield put({
+            type: LOGOUT,
+        });
+    }, exp);
+}
 
-export function* autoAuthenticate() {
+export function* autoAuthenticateWatch() {
     while (true) {
         const action = yield take(AUTO_LOGIN);
         const decoded = jwt_decode(action.payload);
-        const isExpired = decoded * 1000 <= Date.now();
+        const isExpired = decoded.exp * 1000 <= Date.now();
+        console.log('Is token expired: ', isExpired);
         if (isExpired) {
             yield put({
                 type: LOGOUT,
             });
+            localStorage.removeItem(LOCAL_TOKEN);
         } else {
+            setupSectionLogin(decoded.exp);
+            yield delay(600);
             yield put({
                 type: LOGIN_SUCCESS,
                 payload: {
@@ -52,9 +67,16 @@ export function* autoAuthenticate() {
     }
 }
 
-export function* loginFlow() {
+export function* logoutWatch() {
+    while (true) {
+        yield take(LOGOUT);
+        localStorage.removeItem(LOCAL_TOKEN);
+    }
+}
+
+export function* loginWatch() {
     while (true) {
         const data = yield take(LOGIN_REQUEST);
-        const task = yield fork(fetchLogin, data.payload);
+        yield fork(fetchLogin, data.payload);
     }
 }

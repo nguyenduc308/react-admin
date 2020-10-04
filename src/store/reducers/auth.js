@@ -4,6 +4,8 @@ const initialState = {
     isAuth: false,
     error: false,
     token: null,
+    user: null,
+    loading: true,
 };
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -14,15 +16,18 @@ export default (state = initialState, action) => {
                 token: action.payload.token,
                 user: action.payload.user,
                 error: false,
+                loading: false,
             };
         case LOGIN_FAILED:
             return {
                 ...initialState,
                 error: true,
+                loading: false,
             };
         case LOGOUT: {
             return {
                 ...initialState,
+                loading: false,
             };
         }
         default:

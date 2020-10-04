@@ -1,13 +1,19 @@
 import { fork } from 'redux-saga/effects';
-import { autoAuthenticate, loginFlow } from './auth';
-import { createCategoryFlow, getCategoriesFlow } from './categories';
+import { autoAuthenticateWatch, loginWatch, logoutWatch } from './auth';
+import { createCategoryWatch, getCategoriesWatch } from './categories';
+import { getPostsWatch, createPostWatch, getPostBySlugWatch } from './posts';
 
 export function* rootSaga() {
     // Authentication
-    yield fork(autoAuthenticate);
-    yield fork(loginFlow);
+    yield fork(autoAuthenticateWatch);
+    yield fork(loginWatch);
+    yield fork(logoutWatch);
 
     // Categories
-    yield fork(getCategoriesFlow);
-    yield fork(createCategoryFlow);
+    yield fork(getCategoriesWatch);
+    yield fork(createCategoryWatch);
+
+    yield fork(getPostsWatch);
+    yield fork(createPostWatch);
+    yield fork(getPostBySlugWatch);
 }

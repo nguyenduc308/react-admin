@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 export const useUnAuth = (pathRedirect = '/') => {
-    const isAuth = useSelector((state) => state.auth.isAuth);
+    const { isAuth, loading } = useSelector((state) => state.auth);
     const history = useHistory();
 
     useEffect(() => {
-        if (isAuth) {
-            history.goBack(pathRedirect);
+        if (isAuth && !loading) {
+            history.push(pathRedirect);
         }
-    }, [pathRedirect, isAuth]);
+    }, [isAuth, loading, history, pathRedirect]);
 };

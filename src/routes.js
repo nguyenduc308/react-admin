@@ -1,20 +1,29 @@
 import * as paths from './const/paths';
-import { Categories, ListCategories } from './container/categories';
 import { Home } from './container/home';
+import { Categories } from './container/categories';
+import { Posts } from './container/posts';
+import { uuid } from './shared/helper';
 
 export const routes = [
     {
-        id: '1x2',
-        path: paths.HOME,
-        component: Home,
-        isPrivate: true,
-        exact: true,
-    },
-    {
-        id: '2x2',
+        id: uuid(),
         path: `/${paths.CATEGORIES}`,
         component: Categories,
         isPrivate: true,
         exact: false,
+    },
+    {
+        id: uuid(),
+        path: `/${paths.POSTS}`,
+        component: Posts,
+        isPrivate: true,
+        exact: false,
+    },
+    {
+        id: uuid(),
+        path: paths.HOME,
+        component: Home,
+        isPrivate: true,
+        exact: true,
     },
 ];

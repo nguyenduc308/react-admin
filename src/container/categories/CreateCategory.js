@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CREATE_CATEGORY_REQUEST } from '../../store/constants/categories';
 

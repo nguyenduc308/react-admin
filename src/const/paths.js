@@ -7,3 +7,7 @@ export const LIST = 'list';
 export const CREATE = 'create';
 // categories
 export const CATEGORIES = 'categories';
+
+// posts
+
+export const POSTS = 'posts';

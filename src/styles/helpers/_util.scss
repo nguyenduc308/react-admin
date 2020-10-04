@@ -3,12 +3,33 @@
 }
 .list-table {
     width: 100%;
-    thead {
-        background-color: #000;
-        color: #fff;
+    box-shadow: 0 1px 2px gray;
+    border-radius: 4px;
+    overflow: hidden;
+    .list-row {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        justify-content: space-between;
+        div {
+            flex: 2;
+            padding: 8px;
+            &:last-child {
+                padding-right: 50px;
+                flex: 1;
+            }
+        }
     }
-    td,
-    th {
-        padding: 4px 8px;
+    .list-row-head {
+        background-color: #264653;
+        color: white;
     }
+}
+.icon-action {
+    cursor: pointer;
+}
+
+.color-red {
+    color: red;
 }

@@ -4,8 +4,10 @@ import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
 import * as PATH from '../../const/paths';
 import Login from './login/Login';
 import './auth.scss';
+import { useUnAuth } from '../../shared/hooks/useUnAuth';
 
 const Auth = () => {
+    useUnAuth();
     const matchRoute = useRouteMatch();
     return (
         <React.Fragment>
