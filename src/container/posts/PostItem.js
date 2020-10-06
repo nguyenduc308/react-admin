@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
-const PostItem = ({ item }) => {
+const PostItem = ({ item, deleteItem }) => {
     return (
         <div className="list-row">
             <div>
@@ -9,8 +9,11 @@ const PostItem = ({ item }) => {
             </div>
             <div>{item._id}</div>
             <div>{new Date(item.createdAt).toLocaleString()}</div>
-            <div>
-                <DeleteOutlined style={{ color: '#e63946' }} />
+            <div className="text-center">
+                <DeleteOutlined
+                    onClick={() => deleteItem(item)}
+                    style={{ color: '#e63946' }}
+                />
             </div>
         </div>
     );

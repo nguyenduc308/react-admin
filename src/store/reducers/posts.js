@@ -4,6 +4,7 @@ import {
     GET_POSTS_SUCCESS,
     GET_POST_BY_SLUG_SUCCESS,
     CLEAR_CURRENT_POST,
+    DELETE_POST,
 } from '../constants/posts';
 
 const initialState = {
@@ -17,6 +18,17 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 list: action.payload,
+            };
+        case DELETE_POST:
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    data: state.list.data.filter(
+                        (item) => item._id !== action.payload,
+                    ),
+                    count: state.list.count - 1,
+                },
             };
         case CREATE_POST_REQUEST:
             return {

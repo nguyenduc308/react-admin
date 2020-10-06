@@ -10,10 +10,6 @@ const Posts = () => {
     return (
         <React.Fragment>
             <Switch>
-                {/* <Route
-                    path={`${match.url}`}
-                    component={ListPosts}
-                /> */}
                 <Route
                     path={`${match.url}/${paths.LIST}`}
                     component={ListPosts}
