@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Ckeditor from '@ckeditor/ckeditor5-react';
-import { Editor, EditorState, convertToRaw } from 'draft-js';
-import 'draft-js/dist/Draft.css';
 import { Input } from 'antd';
 import { Select, Typography, Divider, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,25 +40,15 @@ const CreatePost = () => {
             [e.target.name]: e.target.value,
         });
     };
-    const [editorState, setEditorState] = React.useState(() =>
-        EditorState.createEmpty(),
-    );
-
     const onSubmit = (e) => {
         e.preventDefault();
-        const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
-        console.log(blocks);
-        const value = blocks
-            .map((block) => (!block.text.trim() && '\n') || block.text)
-            .join('\n');
-        if (blog.title && value) {
+        if (blog.title && blog.content) {
             dispatch({
                 type: CREATE_POST_REQUEST,
-                payload: { ...blog, content: value },
+                payload: blog,
             });
         }
     };
-
     return (
         <form onSubmit={onSubmit}>
             <div className="row">
@@ -76,10 +64,12 @@ const CreatePost = () => {
                     </div>
                     <div className="form-group">
                         <Title level={5}>Nội dung</Title>
-                        <Editor
-                            editorState={editorState}
-                            onChange={setEditorState}
-                        ></Editor>
+                        <Ckeditor
+                            editor={ClassicEditor}
+                            disabled={posting}
+                            onInit={(editor) => {}}
+                            onChange={handleContentChange}
+                        ></Ckeditor>
                     </div>
                 </div>
                 <div className="col col-3">
